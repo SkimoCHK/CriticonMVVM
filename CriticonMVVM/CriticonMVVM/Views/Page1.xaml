@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CriticonMVVM.Views.Page1">
+
+    <StackLayout BackgroundColor="White">
+        <Frame BackgroundColor="Pink" Padding="24" CornerRadius="0" Margin="0,0,0,0" BorderColor="White">
+            <Label Margin="5,0" Text="Criticrografo" HorizontalTextAlignment="Center" TextColor="White" FontSize="25"/>
+        </Frame>
+        <Label TextColor="Black" FontSize="20" Padding="10,20" HorizontalOptions="Start" Text="Nombre:" />
+        <Entry Text="{Binding Nombre}" TextColor="Black" x:Name="NombreUser" Margin="0,0,0,0" Placeholder="Ingrese el nombre por favor"/>
+        <Label TextColor="Black" FontSize="20" Padding="10,20" HorizontalOptions="Start" Text="Genero:" />
+        <Grid>
+            <RadioButton IsChecked="{Binding Hombre}" x:Name="RBhombre" GroupName="Genero" BackgroundColor="Transparent" Margin="40,0" Content="Hombre" TextColor="Black" Grid.Column="0" Grid.Row="0"/>
+            <RadioButton IsChecked="{Binding Mujer}" x:Name="RBmujer" GroupName="Genero"  BackgroundColor="Transparent" Content="Mujer" TextColor="Black" Grid.Column="1" Grid.Row="0"/>
+        </Grid>
+        <Label TextColor="Black" FontSize="20" Padding="10,20" HorizontalOptions="Start" Text="Criticalo con todo los poderes" />
+        <Grid >
+            <StackLayout Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Alto}"  />
+                <Label Text="Alto" TextColor="Black" FontSize="20" Margin="5,0,0,0" />
+            </StackLayout>
+
+            <StackLayout Grid.Column="0" Grid.Row="0" Margin="170,0,0,0" Orientation="Horizontal" AutomationId="CheckBoxFeo">
+                <CheckBox IsChecked="{Binding Feo}" />
+                <Label Text="Feo" TextColor="Black" FontSize="20" Margin="5,0,0,0" />
+            </StackLayout>
+
+            <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal" AutomationId="CheckBoxListo">
+                <CheckBox  IsChecked="{Binding Listo}"/>
+                <Label Text="Listo" TextColor="Black" FontSize="20" Margin="5,0,0,0" />
+            </StackLayout>
+
+            <StackLayout Grid.Column="0" Grid.Row="1" Margin="170,0,0,0" Orientation="Horizontal" AutomationId="CheckBoxExtravagante">
+                <CheckBox  IsChecked="{Binding Extra}"/>
+                <Label Text="Extravagante" TextColor="Black" FontSize="20" Margin="5,0,0,0" />
+            </StackLayout>
+
+            <StackLayout Grid.Column="0" Grid.Row="2" Orientation="Horizontal" AutomationId="CheckBoxRaro">
+                <CheckBox  IsChecked="{Binding Raro}" />
+                <Label Text="Raro" TextColor="Black" FontSize="20" Margin="5,0,0,0" />
+            </StackLayout>
+
+            <StackLayout Grid.Column="0" Grid.Row="2" Margin="170,0,0,0" Orientation="Horizontal" AutomationId="CheckBoxGrande">
+                <CheckBox IsChecked="{Binding Grande}"/>
+                <Label Text="Grande" TextColor="Black" FontSize="20" Margin="5,0,0,0" />
+            </StackLayout>
+            <Button Grid.ColumnSpan="1" Grid.Row="3" Command="{Binding CriticarCommand}" BackgroundColor="Pink" CornerRadius="150" Margin="80,0,80,0" Padding="0,0" Text="Criticar"/>
+
+        </Grid>
+        <Entry Text="{Binding Mensaje}" x:Name="Criticaxd" TextColor="Black" FontSize="20" HeightRequest="90" Margin="0,65,0,0" BackgroundColor="Pink" IsEnabled="False"/>
+
+    </StackLayout>
+</ContentPage>
