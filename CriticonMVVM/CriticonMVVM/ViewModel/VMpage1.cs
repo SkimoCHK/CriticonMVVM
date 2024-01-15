@@ -83,56 +83,57 @@ namespace CriticonMVVM.ViewModel
         }
         #endregion
         #region PROCESOS
+        public string Remplazar(string Message)
+        {
+            while (Message.Contains("o"))
+            {
+                int indice = Message.IndexOf("o");
+                Message = Message.Remove(indice, "o".Length).Insert(indice, "a");
+            }
 
-        public async Task Criticar()
+            return  Message;
+        }
+        public async void Criticar()
         {
             Mensaje = "";
             if (Alto || Feo || Listo || Extra || Raro || Grande)
             {
                 if (!string.IsNullOrEmpty(Nombre))
                 {
-                    if (Hombre)
+                    string datos = Nombre + " es";
+                    Mensaje = Hombre ? " hombre" : " mujer";
+                    Mensaje += Alto ? ", alto" : "";
+                    Mensaje += Feo ? ", feo" : "";
+                    Mensaje += Listo ? ", listo" : "";
+                    Mensaje += Extra ? ", extravagante" : "";
+                    Mensaje += Raro ? ", raro" : "";
+                    Mensaje += Grande ? ", grande" : "";
+                    int Indice = Mensaje.LastIndexOf(", ");
+                    string puntoBuscado = ", ";
+                    Mensaje = Mensaje.Remove(Indice, puntoBuscado.Length).Insert(Indice, " y ");
+
+                    if (Mujer)
                     {
-
-
-                        Mensaje += Nombre;
-                        Mensaje += " es hombre";
-                        Mensaje += Alto ? ", alto" : "";
-                        Mensaje += Feo ? ", feo" : "";
-                        Mensaje += Listo ? ", listo" : "";
-                        Mensaje += Extra ? ", extravagante" : "";
-                        Mensaje += Raro ? ", raro" : "";
-                        Mensaje += Grande ? ", grande" : "";
-                        int Indice = Mensaje.LastIndexOf(", ");
-                        string puntoBuscado = ", ";
-                        Mensaje = Mensaje.Remove(Indice, puntoBuscado.Length).Insert(Indice, " y ");
-
-
+                        Mensaje = Remplazar(Mensaje);
+                        datos += Mensaje;
+                        Mensaje = datos;
                     }
-                    else if (Mujer)
+                    else if (Hombre)
                     {
-
-                        Mensaje += Nombre;
-                        Mensaje += " es mujer";
-                        Mensaje += Alto ? ", alta" : "";
-                        Mensaje += Feo ? ", fea" : "";
-                        Mensaje += Listo ? ", lista" : "";
-                        Mensaje += Extra ? ", extravagante" : "";
-                        Mensaje += Raro ? ", rara" : "";
-                        Mensaje += Grande ? ", grande" : "";
-                        int Indice = Mensaje.LastIndexOf(", ");
-                        string puntoBuscado = ", ";
-                        Mensaje = Mensaje.Remove(Indice, puntoBuscado.Length).Insert(Indice, " y ");
+                        datos += Mensaje;
+                        Mensaje = datos;
                     }
                     else
                     {
+
                         await DisplayAlert("Mensaje", "Por favor seleccione un genero", "salir");
+
                     }
 
                 }
                 else
                 {
-                    await DisplayAlert("Mensaje", "Por favor escriba un nombre", "salir");
+                   await  DisplayAlert("Mensaje", "Por favor escriba un nombre", "salir");
                 }
             }
             else
@@ -146,8 +147,10 @@ namespace CriticonMVVM.ViewModel
         #endregion
 
         #region COMANDOS
-        public ICommand CriticarCommand => new Command (async() => await Criticar());
-        
+        //public ICommand CriticarCommand => new Command (async() => await Criticar());
+        public ICommand CriticarCommand => new Command(Criticar);
+
+
         #endregion
 
 
